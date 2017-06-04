@@ -58,7 +58,7 @@ in arbitrary ways.
 
 - The reward is discounted because the world/environment is stochastic. We can't expect the reward to come along to us in the way we hope based on the policy.     
 
-[!Discounted Reward Formulation](https://raw.githubusercontent.com/sidak/ML-Course-Notes/master/MIT%206.S094%20Deep%20Learning%20for%20Self-Driving%20Cars/img/DiscountedRewardFormulation.png)
+![Discounted Reward Formulation](https://raw.githubusercontent.com/sidak/ML-Course-Notes/master/MIT%206.S094%20Deep%20Learning%20for%20Self-Driving%20Cars/img/DiscountedRewardFormulation.png)
 
 - 
 
