@@ -30,7 +30,7 @@ in arbitrary ways.
 
 - There has to be a stochastic element so that it jumps around and ensures that it doesn't get stuck on a local minima.
 
-### Reinforcement Learning
+### Reinforcement Learning (RL)
 
 - *Hope for Reinforcement Learning*: Brute-force propagation of outcomes to knowledge about states and actions. This is kind of brute-force "reasoning". 
 
@@ -46,11 +46,11 @@ in arbitrary ways.
 `s_0->a_0->r_0->s_1->a_1->r_1.......s_n-1->a_n-1->r_n-1->s_n`
 
 - Components of RL Agent:
-	- *Policy*:agent's behavior function (for any given state, knowledge of what action will I take with some probabilty)
+	- *Policy*: agent's behavior function (knowledge of how for any given state, what action will I take with some probabilty)
 	- *Value function*: How good each state/action are?
 	- *Model*: agent's representation of the environment
 
-- Actions can be non-deterministic (as human life is. Where when you turn right, you sometimes go up)
+- Actions can be non-deterministic (as human life is. Where when you turn right, you may sometimes go up)
 
 - The Agent can take a longer detour as the punishment goes down.
 
@@ -60,6 +60,54 @@ in arbitrary ways.
 
 ![Discounted Reward Formulation](https://raw.githubusercontent.com/sidak/ML-Course-Notes/master/MIT%206.S094%20Deep%20Learning%20for%20Self-Driving%20Cars/img/DiscountedRewardFormulation.png)
 
-- 
+- As the reward is farther and farther into the future, gamma discounts that award or diminishes the impact of the future reward in the evaluation of the current state. 
+
+- The goal is to develop a strategy that maximizes the discounted future award. 
+
+- Approaches for coming up with a good (or optimal or near optimal) policy:
+	- Try to construct a model that optimizes some estimate of the world
+	- Try it in a Monte carlo way, to simulate the world and see how it unrolls, and then compute the optimal policy.
+	- Q-learning, which is an off-policy approach where the Q values are estimated as we go along. Through experience (like playing more and more games), it can estimate the optimal Q function. 
+
+#### Q-learning
+
+- State-value function (V): Expected reward/return when starting in s and following policy (pi)
+
+- State-action value function (Q): Expected reward/return when starting in s, performing a and following policy (pi)  
+
+- The reason that Q-learning is off-policy is that it updates its Q-values using the Q-value of the next state s' and the greedy action a'. In other words, it estimates the return (total discounted future reward) for state-action pairs assuming a greedy policy were followed despite the fact that it's not following a greedy policy.
+
+- Keep updating the Q values for each of the (s,a) pair.
+
+![Q update](https://raw.githubusercontent.com/sidak/ML-Course-Notes/master/MIT%206.S094%20Deep%20Learning%20for%20Self-Driving%20Cars/img/QUpdate.png)
+
+- Exploration v/s Exploitation:
+	- The basic idea is to try out the various actions in the beginning (explore), and then later settle for a greedy/optimal action (exploit).
+	- Thus, key ingredient of RL: **(First explore, then exploit)**
+	- Also, use soft polices (where pi(s,a) > 0 for all s, a)
+
+- Formally, follow an epsilon-greedy policy
+	- With probability of `1-epsilon`, perform the optimal/greedy action	
+	- With probability of `epsilon`, perform a random action
+	- Slowly move it towards greedy policy (epsilon = 0)
+
+- Value Iteration ![Value Iteration](https://raw.githubusercontent.com/sidak/ML-Course-Notes/master/MIT%206.S094%20Deep%20Learning%20for%20Self-Driving%20Cars/img/ValueIteration.png)
+
+- In practice, this value iteration method is impractical
+	- Take the case of Breakout game, where the model representation is:
+	 ![Breakout](https://raw.githubusercontent.com/sidak/ML-Course-Notes/master/MIT%206.S094%20Deep%20Learning%20for%20Self-Driving%20Cars/img/breakout.png)
+		- Image size: 84x84
+		- Take last 4 images (as per time)
+		- Grayscale with 256 gray levels
+	- Overall complexity: `256*(84*84*4)` rows in the Q-table
+
+- What does it mean to have a deep RL agent succeed on a game like Breakout
+
+
+
+
+
+
+
 
 
